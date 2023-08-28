@@ -15,19 +15,6 @@ class SocketService {
     this.socket.on("disconnect", () => {
       console.log("Socket connection dismissed");
     });
-
-    this.socket.on("player-connected", players => {
-      console.log("[player-connected event]: ", players);
-    });
-
-    this.socket.on("message", (message: unknown) => {
-      console.log("[message event]: ", message);
-      this.socket.emit("message-response", "hello");
-    });
-
-    this.socket.on("random-message", (message: unknown) => {
-      console.log("[random-message event]: ", message);
-    });
   }
 
   on(key: string, callback: (...args: unknown[]) => void): void {
