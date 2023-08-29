@@ -12,9 +12,13 @@ class SocketService {
       console.log("Socket connection established");
     });
 
-    this.socket.on("disconnect", () => {
-      console.log("Socket connection dismissed");
+    this.socket.on("disconnect", reason => {
+      console.log("Socket connection dismissed:", reason);
     });
+  }
+
+  getId(): string {
+    return this.socket.id;
   }
 
   on(key: string, callback: (...args: unknown[]) => void): void {
@@ -25,7 +29,7 @@ class SocketService {
     this.socket.off(key, callback);
   }
 
-  emit(key: string, payload: unknown): void {
+  emit(key: string, payload?: unknown): void {
     this.socket.emit(key, payload);
   }
 
