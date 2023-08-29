@@ -7,18 +7,14 @@ class SocketService {
 
   constructor() {
     this.socket = io(config.BACKEND_URL, { autoConnect: false });
-
-    this.socket.on("connect", () => {
-      console.log("Socket connection established");
-    });
-
-    this.socket.on("disconnect", reason => {
-      console.log("Socket connection dismissed:", reason);
-    });
   }
 
   getId(): string {
     return this.socket.id;
+  }
+
+  isConnected(): boolean {
+    return this.socket.connected;
   }
 
   on(key: string, callback: (...args: unknown[]) => void): void {
