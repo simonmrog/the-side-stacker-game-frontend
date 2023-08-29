@@ -18,9 +18,9 @@ function App() {
       setIsConnected(true);
     });
 
-    socketService.on("disconnect", reason => {
-      console.log("Socket connection dismissed:", reason);
-      setIsConnected(false);
+    socketService.on("connecting", () => {
+      console.log("[Event]: connecting");
+      document.write("Connecting...");
     });
 
     socketService.on("connect_failed", () => {
@@ -29,37 +29,34 @@ function App() {
       document.write("Cannot connect to the server");
     });
 
-    socketService.on("game-created", (game: unknown) => {
-      console.log("[Event]: game-created", game);
-      setGame(game as GameState);
+    socketService.on("disconnect", reason => {
+      console.log("Socket connection dismissed:", reason);
+      setIsConnected(false);
     });
 
-    socketService.on("player-joined", (game: unknown) => {
-      console.log("[Event]: user-joined");
-      setGame(game as GameState);
-    });
-
-    socketService.on("waiting-for-second-user", (game: unknown) => {
-      console.log("[Event]: waiting-for-second-user");
-      setGame(game as GameState);
-    });
-
-    socketService.on("game-restarted", (game: unknown) => {
-      console.log("[Event]: game-restarted");
-      setGame(game as GameState);
-    });
+    // game interactions
+    socketService.on("game-created", (game: unknown) => onGameUpdate("game-created", game));
+    socketService.on("player-joined", (game: unknown) => onGameUpdate("player-joined", game));
+    socketService.on("waiting-for-second-user", (game: unknown) => onGameUpdate("waiting-for-second-user", game));
+    socketService.on("game-restarted", (game: unknown) => onGameUpdate("game-restarted", game));
 
     return () => {
       socketService.disconnect();
       socketService.off("connect");
-      socketService.off("disconnect");
+      socketService.off("connecting");
       socketService.off("connect_failed");
+      socketService.off("disconnect");
       socketService.off("game-created");
       socketService.off("player-joined");
       socketService.off("waiting-for-second-user");
       socketService.off("game-restarted");
     };
   }, []);
+
+  const onGameUpdate = (event: string, game: unknown) => {
+    console.log(`[Event]: ${event}`);
+    setGame(game as GameState);
+  };
 
   const newGame = () => socketService.emit("new-game");
   const restartGame = () => socketService.emit("restart-game");
