@@ -11,6 +11,11 @@ function App() {
   const [game, setGame] = useState<GameState | null>(null);
 
   useEffect(() => {
+    const onGameUpdate = (event: string, game: unknown) => {
+      console.log(`[Event]: ${event}`);
+      setGame(game as GameState);
+    };
+
     socketService.connect();
 
     socketService.on("connect", () => {
@@ -52,11 +57,6 @@ function App() {
       socketService.off("game-restarted");
     };
   }, []);
-
-  const onGameUpdate = (event: string, game: unknown) => {
-    console.log(`[Event]: ${event}`);
-    setGame(game as GameState);
-  };
 
   const newGame = () => socketService.emit("new-game");
   const restartGame = () => socketService.emit("restart-game");
