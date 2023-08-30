@@ -1,34 +1,46 @@
-export interface Game {
+export interface IGame {
   start(): void;
   endGame(result: string): void;
-  handleTurn(player: string, move: Move): void;
+  handleTurn(player: string, move: IMove): void;
   checkForDraw(): boolean;
   checkForWin(player: string, row: number, column: number): boolean;
 }
 
-export interface GameState {
+export interface IGameState {
   status: GameStatus;
+  board: TBoard;
   players: Array<string>;
-  board: Board;
-  currentPlayer: string;
+  currentPlayer: string | null;
+  moves: Array<string>;
+  winnerId: string | null;
 }
 
 export enum GameStatus {
   NOT_STARTED = "not-started",
   WAITING_FOR_SECOND_USER = "waiting-for-second-user",
   STARTED = "started",
+  FINISHED = "finished",
 }
 
-export type Board = Array<Row>;
+export type TBoard = Array<TRow>;
 
-export type Row = Array<string>;
+export type TRow = Array<string>;
 
-export interface Move {
+export type TCell = string;
+
+export interface IMove {
   row: number;
-  side: "right" | "left";
+  side: ISide;
 }
 
-export interface PositionInBoard {
+export type ISide = "left" | "right";
+
+export interface IPositionInBoard {
   row: number;
   column: number;
+}
+
+export interface IGameStateEvent {
+  playerId: string;
+  gameState: IGameState;
 }
