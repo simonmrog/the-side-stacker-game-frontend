@@ -25,8 +25,8 @@ class SocketService {
     this.socket.off(key, callback);
   }
 
-  emit(key: string, payload?: unknown): void {
-    this.socket.emit(key, payload);
+  emit(key: string, ...args: unknown[]) {
+    this.socket.emit(key, ...args);
   }
 
   connect(): void {
