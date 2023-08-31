@@ -9,7 +9,7 @@ import {
 } from "./gameContext.interface";
 
 export const GameContext = createContext<IGameContext>({
-  playerId: null,
+  player: null,
   gameState: null,
   dispatch: () => undefined,
 });
@@ -18,7 +18,7 @@ export function GameProvider({ children }: IGameProviderProps) {
   const reducer: Reducer<IReducerState, IReducerAction> = (state: IReducerState, action: IReducerAction) => {
     switch (action.type) {
       case ReducerActions.UPDATE_PLAYER_ID:
-        return { ...state, playerId: action.payload.playerId };
+        return { ...state, player: action.payload.player };
       case ReducerActions.UPDATE_GAME:
         return { ...state, gameState: action.payload.gameState };
       default:
@@ -27,7 +27,7 @@ export function GameProvider({ children }: IGameProviderProps) {
   };
 
   const [gameState, dispatch] = useReducer(reducer, {
-    playerId: null,
+    player: null,
     gameState: null,
   });
 

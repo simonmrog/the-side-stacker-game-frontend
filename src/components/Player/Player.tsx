@@ -1,7 +1,9 @@
 import React from "react";
 
+import { StyledDiv } from "./styles";
+
 function Player() {
-  return <div>Player</div>;
+  return <StyledDiv></StyledDiv>;
 }
 
 export default Player;

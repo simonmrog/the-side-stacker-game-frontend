@@ -11,9 +11,9 @@ interface IBoardProps {
 }
 
 function Table({ board }: IBoardProps) {
-  const { playerId, gameState } = useGameContext();
+  const { player, gameState } = useGameContext();
 
-  const getResultMessage = () => (playerId === gameState?.winnerId ? `${playerId} won` : `${playerId} lost`);
+  const getResultMessage = () => (player?.id === gameState?.winnerId ? `${player?.id} won` : `${player?.id} lost`);
 
   return (
     <>

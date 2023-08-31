@@ -1,4 +1,4 @@
-import { IGameState } from "../interfaces/sideStacker.interface";
+import { IGameState, Player } from "../interfaces/sideStacker.interface";
 
 export enum ReducerActions {
   UPDATE_PLAYER_ID = "update-player-id",
@@ -6,7 +6,7 @@ export enum ReducerActions {
 }
 
 export interface IReducerState {
-  playerId: string | null | undefined;
+  player: Player | null | undefined;
   gameState: IGameState | null | undefined;
 }
 
@@ -16,12 +16,12 @@ export interface IReducerAction {
 }
 
 export interface IReducerActionPayload {
-  playerId?: string;
+  player?: Player;
   gameState?: IGameState;
 }
 
 export interface IGameContext {
-  playerId: string | null | undefined;
+  player: Player | null | undefined;
   gameState: IGameState | null | undefined;
   dispatch: (action: IReducerAction) => void;
 }

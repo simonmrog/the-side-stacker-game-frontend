@@ -1,25 +1,24 @@
-export interface IGame {
-  start(): void;
-  endGame(result: string): void;
-  handleTurn(player: string, move: IMove): void;
-  checkForDraw(): boolean;
-  checkForWin(player: string, row: number, column: number): boolean;
-}
-
+// react state interface
 export interface IGameState {
   status: GameStatus;
   board: TBoard;
-  players: Array<string>;
+  players: Array<Player>;
   currentPlayer: string | null;
   moves: Array<string>;
   winnerId: string | null;
 }
 
+// possible states of the game flow
 export enum GameStatus {
   NOT_STARTED = "not-started",
   WAITING_FOR_SECOND_USER = "waiting-for-second-user",
   STARTED = "started",
   FINISHED = "finished",
+}
+
+export interface Player {
+  id: string;
+  color: string;
 }
 
 export type TBoard = Array<TRow>;
@@ -40,7 +39,12 @@ export interface IPositionInBoard {
   column: number;
 }
 
+// event interfaces
 export interface IGameStateEvent {
-  playerId: string;
+  player: Player;
   gameState: IGameState;
+}
+
+export interface IErrorMessageEvent {
+  errorMessage: string;
 }

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import { IGameState, GameStatus, IGameStateEvent } from "./interfaces/sideStacker.interface";
+import {
+  IGameState,
+  GameStatus,
+  Player,
+  IGameStateEvent,
+  IErrorMessageEvent,
+} from "./interfaces/sideStacker.interface";
 import { ReducerActions } from "./contexts/gameContext.interface";
 import socketService from "./services/socketService";
 import { useGameContext } from "./hooks/useGameContext";
@@ -8,6 +14,7 @@ import Board from "./components/StackerBoard/SideStacker";
 
 function App() {
   const [isConnected, setIsConnected] = useState(socketService.isConnected());
+  const [error, setError] = useState<string | null>(null);
   const { gameState, dispatch } = useGameContext();
 
   // Disconnects the socket connection
@@ -31,9 +38,9 @@ function App() {
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState: game as IGameState } });
     };
 
-    const onPlayerIdGenerated = (event: string, playerId: unknown) => {
-      console.log(`[Event]: ${event}`, playerId);
-      dispatch({ type: ReducerActions.UPDATE_PLAYER_ID, payload: { playerId: playerId as string } });
+    const onPlayerGenerated = (event: string, player: unknown) => {
+      console.log(`[Event]: ${event}`, player);
+      dispatch({ type: ReducerActions.UPDATE_PLAYER_ID, payload: { player: player as Player } });
     };
 
     const onGameUpdate = (event: string, game: unknown) => {
@@ -46,14 +53,21 @@ function App() {
     };
 
     const onGameDisconnected = (event: string, payload: unknown) => {
-      const { playerId, gameState } = payload as IGameStateEvent;
+      const { player, gameState } = payload as IGameStateEvent;
       console.log(`[Event]: ${event}`, gameState);
-      console.log(`${playerId} disconnected from the game`);
+      console.log(payload);
+      console.log(`${player.id} disconnected from the game`);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState } });
+    };
+
+    const onException = (event: string, error: unknown) => {
+      console.log(`[Event]: ${event}`, error);
+      setError((error as IErrorMessageEvent).errorMessage);
     };
 
     socketService.connect();
 
+    // connection related events
     socketService.on("connect", () => {
       console.log("Socket connection established");
       setIsConnected(true);
@@ -75,26 +89,29 @@ function App() {
       setIsConnected(false);
     });
 
-    // game interactions
+    // game related events
     socketService.on("game-created", (game: unknown) => onGameStart("game-created", game));
     socketService.on("game-restarted", (game: unknown) => onGameStart("game-restarted", game));
     socketService.on("player-joined", (game: unknown) => onPlayerJoined("player-joined", game));
-    socketService.on("player-id-generated", (payload: unknown) => onPlayerIdGenerated("player-id-generated", payload));
+    socketService.on("player-generated", (payload: unknown) => onPlayerGenerated("player-id-generated", payload));
     socketService.on("waiting-for-second-user", (game: unknown) => onGameUpdate("waiting-for-second-user", game));
     socketService.on("player-moved", (game: unknown) => onGameUpdate("player-moved", game));
     socketService.on("game-finished", (game: unknown) => onGameFinished("game-finished", game));
     socketService.on("game-disconnected", (payload: unknown) => onGameDisconnected("game-finished", payload));
+    socketService.on("exception", (error: unknown) => onException("exception", error));
 
     return () => {
+      // cleaning up event listeners
       socketService.disconnect();
       socketService.off("connect");
       socketService.off("connecting");
       socketService.off("connect_failed");
       socketService.off("disconnect");
+      socketService.off("exception");
       socketService.off("game-created");
       socketService.off("game-restarted");
       socketService.off("player-joined");
-      socketService.off("player-id-generated");
+      socketService.off("player-generated");
       socketService.off("waiting-for-second-user");
       socketService.off("player-moved");
       socketService.off("game-finished");
@@ -109,11 +126,13 @@ function App() {
   const restartGame = () => socketService.emit("restart-game");
   const joinGame = () => socketService.emit("join-game");
 
+  const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
+
   const canJoinGame = () =>
-    gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && !gameState.players.includes(socketService.getId());
+    gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && !playerExists(socketService.getId());
 
   const waitingForUser = () =>
-    gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && gameState.players.includes(socketService.getId());
+    gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && playerExists(socketService.getId());
 
   const gameIsOnCourse = () => gameState?.status === GameStatus.STARTED || gameState?.status === GameStatus.FINISHED;
 
@@ -137,6 +156,7 @@ function App() {
           )}
         </>
       )}
+      {error && <label>An error occurred: {error}</label>}
     </div>
   );
 }
