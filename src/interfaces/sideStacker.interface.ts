@@ -1,8 +1,10 @@
 // react state interface
+import { IPlayer } from "./player.interface";
+
 export interface IGameState {
   status: GameStatus;
   board: TBoard;
-  players: Array<Player>;
+  players: Array<IPlayer>;
   currentPlayer: string | null;
   moves: Array<string>;
   winnerId: string | null;
@@ -14,11 +16,6 @@ export enum GameStatus {
   WAITING_FOR_SECOND_USER = "waiting-for-second-user",
   STARTED = "started",
   FINISHED = "finished",
-}
-
-export interface Player {
-  id: string;
-  color: string;
 }
 
 export type TBoard = Array<TRow>;
@@ -34,14 +31,9 @@ export interface IMove {
 
 export type ISide = "left" | "right";
 
-export interface IPositionInBoard {
-  row: number;
-  column: number;
-}
-
 // event interfaces
 export interface IGameStateEvent {
-  player: Player;
+  player: IPlayer;
   gameState: IGameState;
 }
 

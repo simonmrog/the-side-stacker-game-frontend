@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  IGameState,
-  GameStatus,
-  Player,
-  IGameStateEvent,
-  IErrorMessageEvent,
-} from "./interfaces/sideStacker.interface";
+import { IPlayer } from "./interfaces/player.interface";
+import { IGameState, GameStatus, IGameStateEvent, IErrorMessageEvent } from "./interfaces/sideStacker.interface";
 import { ReducerActions } from "./contexts/gameContext.interface";
 import socketService from "./services/socketService";
 import { useGameContext } from "./hooks/useGameContext";
@@ -40,7 +35,7 @@ function App() {
 
     const onPlayerGenerated = (event: string, player: unknown) => {
       console.log(`[Event]: ${event}`, player);
-      dispatch({ type: ReducerActions.UPDATE_PLAYER_ID, payload: { player: player as Player } });
+      dispatch({ type: ReducerActions.UPDATE_PLAYER_ID, payload: { player: player as IPlayer } });
     };
 
     const onGameUpdate = (event: string, game: unknown) => {
