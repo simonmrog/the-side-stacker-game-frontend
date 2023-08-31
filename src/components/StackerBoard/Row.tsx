@@ -22,7 +22,7 @@ function Row({ row, rIndex }: IRowProps) {
   };
 
   const canMakeMove = () => {
-    const fullRow = () => row.every((cell: TCell) => cell !== "");
+    const fullRow = () => row.every((cell: TCell) => cell !== null);
     // The button should be disabled when the row is full, when the game is finished or when is not the user's move
     return !fullRow() && gameState?.status === GameStatus.STARTED && gameState?.currentPlayer === player?.id;
   };
@@ -32,8 +32,8 @@ function Row({ row, rIndex }: IRowProps) {
       <button className="row-left-button" onClick={() => handleMove(rIndex, "left")} disabled={!canMakeMove()}>
         Left
       </button>
-      {row.map((value, cIndex) => (
-        <Cell key={`${rIndex}-${cIndex}`} value={value} />
+      {row.map((player, cIndex) => (
+        <Cell key={`${rIndex}-${cIndex}`} player={player} />
       ))}
       <button className="row-right-button" onClick={() => handleMove(rIndex, "right")} disabled={!canMakeMove()}>
         Right

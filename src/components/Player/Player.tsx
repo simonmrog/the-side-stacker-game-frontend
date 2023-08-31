@@ -1,12 +1,14 @@
 import React from "react";
 
 import { StyledDiv } from "./styles";
-import { useGameContext } from "../../hooks/useGameContext";
 
-function Player() {
-  const { player } = useGameContext();
+interface IPlayerProps {
+  color: string;
+}
 
-  return <StyledDiv color={player!.color}></StyledDiv>;
+function Player({ color }: IPlayerProps) {
+  console.log(color);
+  return <StyledDiv color={color}></StyledDiv>;
 }
 
 export default Player;

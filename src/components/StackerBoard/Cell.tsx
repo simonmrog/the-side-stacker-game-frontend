@@ -4,11 +4,11 @@ import { StyledCell } from "./styles";
 import Player from "../Player/Player";
 
 interface ICellProps {
-  value: string;
+  player: string;
 }
 
-function Cell({ value }: ICellProps) {
-  return <StyledCell className="Cell">{value && <Player />}</StyledCell>;
+function Cell({ player }: ICellProps) {
+  return <StyledCell className="Cell">{player && <Player color={player.color} />}</StyledCell>;
 }
 
 export default Cell;
