@@ -1,4 +1,4 @@
-import { useReducer, createContext, Reducer } from "react";
+import { useState, useReducer, createContext, Reducer } from "react";
 
 import {
   ReducerActions,
@@ -12,6 +12,8 @@ import socketService from "../services/socketService";
 export const GameContext = createContext<IGameContext>({
   player: null,
   gameState: null,
+  gameOnCourse: false,
+  setGameOnCourse: () => undefined,
   newGame: () => undefined,
   restartGame: () => undefined,
   joinGame: () => undefined,
@@ -31,6 +33,7 @@ export function GameProvider({ children }: IGameProviderProps) {
   };
 
   // game state
+  const [gameOnCourse, setGameOnCourse] = useState<boolean>(false);
   const [gameState, dispatch] = useReducer(reducer, {
     player: null,
     gameState: null,
@@ -50,7 +53,9 @@ export function GameProvider({ children }: IGameProviderProps) {
   const joinGame = () => socketService.emit("join-game");
 
   return (
-    <GameContext.Provider value={{ ...gameState, newGame, restartGame, joinGame, dispatch }}>
+    <GameContext.Provider
+      value={{ ...gameState, gameOnCourse, setGameOnCourse, newGame, restartGame, joinGame, dispatch }}
+    >
       {children}
     </GameContext.Provider>
   );

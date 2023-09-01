@@ -7,7 +7,7 @@ import { useGameContext } from "../../hooks/useGameContext";
 
 function Home() {
   const { isConnected, error } = useSocketContext();
-  const { gameState, newGame, joinGame } = useGameContext();
+  const { gameState, setGameOnCourse, newGame, joinGame } = useGameContext();
   const navigate = useNavigate();
 
   const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
@@ -19,11 +19,13 @@ function Home() {
 
   const handleNewGame = () => {
     newGame();
+    setGameOnCourse(true);
     navigate("/game");
   };
 
   const handleJoinGame = () => {
     joinGame();
+    setGameOnCourse(true);
     navigate("/game");
   };
 

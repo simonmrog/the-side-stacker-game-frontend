@@ -11,11 +11,11 @@ import Board from "../../components/StackerBoard/Board";
 import MovesBoard from "../../components/MovesBoard/MovesBoard";
 
 function GameBoard() {
-  const { player, gameState, restartGame } = useGameContext();
+  const { player, gameState, gameOnCourse, restartGame } = useGameContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!gameState) navigate("/");
+    if (!gameOnCourse) navigate("/");
   }, []);
 
   const getResultMessage = () => (player?.id === gameState?.winnerId ? `${player?.id} won` : `${player?.id} lost`);
@@ -27,9 +27,9 @@ function GameBoard() {
 
   return (
     <>
-      {!gameState && <label>No game in course, redirecting...</label>}
-      {gameState && waitingForUser() && <div>Waiting for someone to join the game...</div>}
-      {gameState && !waitingForUser() && (
+      {!gameOnCourse && <label>No game in course, redirecting...</label>}
+      {gameOnCourse && waitingForUser() && <div>Waiting for someone to join the game...</div>}
+      {gameOnCourse && !waitingForUser() && (
         <div>
           <h1>Board</h1>
           <Board />

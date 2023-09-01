@@ -24,6 +24,8 @@ export interface IReducerActionPayload {
 export interface IGameContext {
   player: IPlayer | null | undefined;
   gameState: IGameState | null | undefined;
+  gameOnCourse: boolean;
+  setGameOnCourse: (onCourse: boolean) => void;
   newGame: () => void;
   restartGame: () => void;
   joinGame: () => void;
