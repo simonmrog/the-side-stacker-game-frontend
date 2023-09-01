@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import { IPlayer } from "./interfaces/player.interface";
-import { IGameState, GameStatus, IGameStateEvent, IErrorMessageEvent } from "./interfaces/sideStacker.interface";
+import { IGameState, IGameStateEvent, IErrorMessageEvent } from "./interfaces/sideStacker.interface";
 import { ReducerActions } from "./contexts/gameContext.interface";
+
 import socketService from "./services/socketService";
+import { useSocketContext } from "./hooks/useSocketContext";
 import { useGameContext } from "./hooks/useGameContext";
-import Board from "./components/StackerBoard/SideStacker";
+
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  const [isConnected, setIsConnected] = useState(socketService.isConnected());
-  const [error, setError] = useState<string | null>(null);
-  const { gameState, dispatch } = useGameContext();
+  const { setConnection, setError } = useSocketContext();
+  const { dispatch } = useGameContext();
 
   // Disconnects the socket connection
   useEffect(() => {
@@ -64,7 +67,7 @@ function App() {
     // connection related events
     socketService.on("connect", () => {
       console.log("Socket connection established");
-      setIsConnected(true);
+      setConnection(true);
     });
 
     socketService.on("connecting", () => {
@@ -74,20 +77,20 @@ function App() {
 
     socketService.on("connect_failed", () => {
       console.log("[Event]: connect_failed");
-      setIsConnected(false);
-      document.write("Cannot connect to the server");
+      setConnection(false);
+      setError("Cannot connect to the server");
     });
 
     socketService.on("disconnect", reason => {
       console.log("Socket connection dismissed:", reason);
-      setIsConnected(false);
+      setConnection(false);
     });
 
     // game related events
     socketService.on("game-created", (game: unknown) => onGameStart("game-created", game));
     socketService.on("game-restarted", (game: unknown) => onGameStart("game-restarted", game));
     socketService.on("player-joined", (game: unknown) => onPlayerJoined("player-joined", game));
-    socketService.on("player-generated", (payload: unknown) => onPlayerGenerated("player-id-generated", payload));
+    socketService.on("player-generated", (payload: unknown) => onPlayerGenerated("player-generated", payload));
     socketService.on("waiting-for-second-user", (game: unknown) => onGameUpdate("waiting-for-second-user", game));
     socketService.on("player-moved", (game: unknown) => onGameUpdate("player-moved", game));
     socketService.on("game-finished", (game: unknown) => onGameFinished("game-finished", game));
@@ -113,50 +116,10 @@ function App() {
     };
   }, []);
 
-  const newGame = () => {
-    // SocketIO guarantees the same event order
-    socketService.emit("new-game");
-    socketService.emit("join-game");
-  };
-  const restartGame = () => {
-    socketService.emit("restart-game");
-    socketService.emit("join-game");
-  };
-
-  const joinGame = () => socketService.emit("join-game");
-
-  const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
-
-  const canJoinGame = () =>
-    gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && !playerExists(socketService.getId());
-
-  const waitingForUser = () =>
-    gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && playerExists(socketService.getId());
-
-  const gameIsOnCourse = () => gameState?.status === GameStatus.STARTED || gameState?.status === GameStatus.FINISHED;
-
   return (
-    <div className="App">
-      <h1>The Side Stacker Game</h1>
-      {!isConnected && <div>Cannot connect to the server</div>}
-      {isConnected && (
-        <>
-          {!gameState && <button onClick={newGame}>New Game</button>}
-
-          {canJoinGame() && <button onClick={joinGame}>Join Game</button>}
-
-          {waitingForUser() && <div>Waiting for someone to join the game...</div>}
-
-          {gameState && gameIsOnCourse() && (
-            <>
-              <Board board={gameState.board} />
-              <button onClick={restartGame}>Restart</button>
-            </>
-          )}
-        </>
-      )}
-      {error && <label>An error occurred: {error}</label>}
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 

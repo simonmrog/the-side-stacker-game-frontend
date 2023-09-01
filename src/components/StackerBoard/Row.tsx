@@ -1,12 +1,12 @@
 import React from "react";
 
-import socketService from "../../services/socketService";
-
-import { GameStatus, TRow, TCell, IMove, ISide } from "../../interfaces/sideStacker.interface";
-import Cell from "./Cell";
 import { StyledRow } from "./styles";
 
+import socketService from "../../services/socketService";
+import { GameStatus, TRow, TCell, IMove, ISide } from "../../interfaces/sideStacker.interface";
 import { useGameContext } from "../../hooks/useGameContext";
+
+import Cell from "./Cell";
 
 interface IRowProps {
   row: TRow;

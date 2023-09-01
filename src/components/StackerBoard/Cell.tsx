@@ -1,7 +1,9 @@
 import React from "react";
 
 import { StyledCell } from "./styles";
+
 import { IPlayer } from "../../interfaces/player.interface";
+
 import Player from "../Player/Player";
 
 interface ICellProps {

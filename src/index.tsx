@@ -4,14 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import { SocketProvider } from "./contexts/socketContext";
 import { GameProvider } from "./contexts/gameContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
-    <GameProvider>
-      <App />
-    </GameProvider>
+    <SocketProvider>
+      <GameProvider>
+        <App />
+      </GameProvider>
+    </SocketProvider>
   </React.StrictMode>
 );
 

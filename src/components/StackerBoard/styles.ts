@@ -8,10 +8,6 @@ export const StyledBoard = styled.div`
   border: 1px solid yellow;
 `;
 
-export const StyledResultMessage = styled.div`
-  background-color: grey;
-`;
-
 export const StyledRow = styled.div`
   display: flex;
   padding: 20px;

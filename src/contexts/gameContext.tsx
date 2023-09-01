@@ -7,10 +7,14 @@ import {
   IGameContext,
   IGameProviderProps,
 } from "./gameContext.interface";
+import socketService from "../services/socketService";
 
 export const GameContext = createContext<IGameContext>({
   player: null,
   gameState: null,
+  newGame: () => undefined,
+  restartGame: () => undefined,
+  joinGame: () => undefined,
   dispatch: () => undefined,
 });
 
@@ -26,10 +30,28 @@ export function GameProvider({ children }: IGameProviderProps) {
     }
   };
 
+  // game state
   const [gameState, dispatch] = useReducer(reducer, {
     player: null,
     gameState: null,
   });
 
-  return <GameContext.Provider value={{ ...gameState, dispatch }}>{children}</GameContext.Provider>;
+  const newGame = () => {
+    // SocketIO guarantees the same event order
+    socketService.emit("new-game");
+    socketService.emit("join-game");
+  };
+
+  const restartGame = () => {
+    socketService.emit("restart-game");
+    socketService.emit("join-game");
+  };
+
+  const joinGame = () => socketService.emit("join-game");
+
+  return (
+    <GameContext.Provider value={{ ...gameState, newGame, restartGame, joinGame, dispatch }}>
+      {children}
+    </GameContext.Provider>
+  );
 }

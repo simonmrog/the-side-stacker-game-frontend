@@ -1,30 +1,23 @@
 import React from "react";
 
+import { StyledBoard } from "./styles";
+
 import { useGameContext } from "../../hooks/useGameContext";
-import { TBoard } from "../../interfaces/sideStacker.interface";
+
 import Row from "./Row";
 
-import { StyledBoard, StyledResultMessage } from "./styles";
-
-interface IBoardProps {
-  board: TBoard;
-}
-
-function Table({ board }: IBoardProps) {
-  const { player, gameState } = useGameContext();
-
-  const getResultMessage = () => (player?.id === gameState?.winnerId ? `${player?.id} won` : `${player?.id} lost`);
+function Board() {
+  const { gameState } = useGameContext();
 
   return (
     <>
-      <StyledBoard className="Table">
-        {board.map((row, rIndex) => (
+      <StyledBoard className="Board">
+        {gameState?.board.map((row, rIndex) => (
           <Row key={rIndex} row={row} rIndex={rIndex} />
         ))}
       </StyledBoard>
-      <StyledResultMessage>{gameState?.winnerId && <label>{getResultMessage()}</label>}</StyledResultMessage>
     </>
   );
 }
 
-export default Table;
+export default Board;
