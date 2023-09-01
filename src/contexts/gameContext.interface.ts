@@ -18,7 +18,7 @@ export interface IReducerAction {
 
 export interface IReducerActionPayload {
   player?: IPlayer;
-  gameState?: IGameState;
+  gameState?: IGameState | null;
 }
 
 export interface IGameContext {

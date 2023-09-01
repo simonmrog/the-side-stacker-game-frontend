@@ -16,7 +16,7 @@ function GameBoard() {
 
   useEffect(() => {
     if (!gameOnCourse) navigate("/");
-  }, []);
+  }, [gameState]);
 
   const getResultMessage = () => (player?.id === gameState?.winnerId ? `${player?.id} won` : `${player?.id} lost`);
 

@@ -13,7 +13,7 @@ import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   const { setConnection, setError } = useSocketContext();
-  const { dispatch } = useGameContext();
+  const { setGameOnCourse, dispatch } = useGameContext();
 
   // Disconnects the socket connection
   useEffect(() => {
@@ -48,6 +48,8 @@ function App() {
 
     const onGameFinished = (event: string, game: unknown) => {
       console.log(`[Event]: ${event}`, game);
+      dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState: null } });
+      setGameOnCourse(false);
     };
 
     const onGameDisconnected = (event: string, payload: unknown) => {
@@ -55,6 +57,7 @@ function App() {
       console.log(`[Event]: ${event}`, gameState);
       console.log(`${player.id} disconnected from the game`);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState } });
+      setGameOnCourse(false);
     };
 
     const onException = (event: string, error: unknown) => {

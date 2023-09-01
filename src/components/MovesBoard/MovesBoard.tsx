@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useGameContext } from "../../hooks/useGameContext";
 
 function MovesBoard() {
@@ -12,7 +10,7 @@ function MovesBoard() {
         {
           <ul>
             {gameState?.moves.map((move, index) => (
-              <li key={index}></li>
+              <li key={index}>{move}</li>
             ))}
           </ul>
         }
