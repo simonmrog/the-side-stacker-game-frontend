@@ -97,7 +97,7 @@ function App() {
     socketService.on("waiting-for-second-user", (game: unknown) => onGameUpdate("waiting-for-second-user", game));
     socketService.on("player-moved", (game: unknown) => onGameUpdate("player-moved", game));
     socketService.on("game-finished", (game: unknown) => onGameFinished("game-finished", game));
-    socketService.on("game-disconnected", (payload: unknown) => onGameDisconnected("game-finished", payload));
+    socketService.on("game-disconnected", (payload: unknown) => onGameDisconnected("game-disconnected", payload));
     socketService.on("exception", (error: unknown) => onException("exception", error));
 
     return () => {
