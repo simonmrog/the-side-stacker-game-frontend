@@ -31,7 +31,7 @@ function GameBoard() {
       {gameOnCourse && waitingForUser() && <div>Waiting for someone to join the game...</div>}
       {gameOnCourse && !waitingForUser() && (
         <div>
-          <h1>Board</h1>
+          <h1>Welcome, {player?.name}</h1>
           <Board />
           <MovesBoard />
           <button onClick={restartGame}>Restart</button>
