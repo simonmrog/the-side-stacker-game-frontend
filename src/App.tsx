@@ -48,8 +48,6 @@ function App() {
 
     const onGameFinished = (event: string, game: unknown) => {
       console.log(`[Event]: ${event}`, game);
-      dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState: null } });
-      setGameOnCourse(false);
     };
 
     const onGameDisconnected = (event: string, payload: unknown) => {
