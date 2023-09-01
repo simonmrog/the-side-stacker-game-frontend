@@ -67,7 +67,7 @@ function App() {
 
     // connection related events
     socketService.on("connect", () => {
-      console.log("Socket connection established");
+      console.log("[Event] socket connection established");
       setConnection(true);
     });
 

@@ -18,7 +18,7 @@ function GameBoard() {
     if (!gameOnCourse) navigate("/");
   }, [gameState]);
 
-  const getResultMessage = () => (player?.id === gameState?.winnerId ? `${player?.id} won` : `${player?.id} lost`);
+  const getResultMessage = () => (player?.id === gameState?.winnerId ? `${player?.name} won` : `${player?.name} lost`);
 
   const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
 
