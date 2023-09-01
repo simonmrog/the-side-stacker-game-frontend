@@ -7,7 +7,6 @@ interface IPlayerProps {
 }
 
 function Player({ color }: IPlayerProps) {
-  console.log(color);
   return <StyledDiv color={color}></StyledDiv>;
 }
 

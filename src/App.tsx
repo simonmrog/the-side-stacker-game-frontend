@@ -50,7 +50,6 @@ function App() {
     const onGameDisconnected = (event: string, payload: unknown) => {
       const { player, gameState } = payload as IGameStateEvent;
       console.log(`[Event]: ${event}`, gameState);
-      console.log(payload);
       console.log(`${player.id} disconnected from the game`);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState } });
     };
@@ -115,10 +114,15 @@ function App() {
   }, []);
 
   const newGame = () => {
+    // SocketIO guarantees the same event order
     socketService.emit("new-game");
     socketService.emit("join-game");
   };
-  const restartGame = () => socketService.emit("restart-game");
+  const restartGame = () => {
+    socketService.emit("restart-game");
+    socketService.emit("join-game");
+  };
+
   const joinGame = () => socketService.emit("join-game");
 
   const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
