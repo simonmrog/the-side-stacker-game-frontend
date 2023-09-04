@@ -3,6 +3,48 @@
   padding: 0;
 }
 
-html {
+html,
+body {
+  font-family: "Montserrat";
   height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #fbf5db;
+  background-image: url("../public/assets/top-left-logo.svg"), url("../public/assets//bottom-right-logo.svg");
+  background-position: top left, bottom right;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 767px) {
+  body {
+    -webkit-background-size: 40%;
+    -moz-background-size: 40%;
+    -o-background-size: 40%;
+    background-size: 40%;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  body {
+    -webkit-background-size: 25%;
+    -moz-background-size: 25%;
+    -o-background-size: 25%;
+    background-size: 25%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    -webkit-background-size: 15%;
+    -moz-background-size: 15%;
+    -o-background-size: 15%;
+    background-size: 15%;
+  }
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }
