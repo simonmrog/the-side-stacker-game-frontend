@@ -5,6 +5,9 @@ import socketService from "../../services/socketService";
 import { useSocketContext } from "../../hooks/useSocketContext";
 import { useGameContext } from "../../hooks/useGameContext";
 
+import { HomeStyledWrapper, HomeStyledConnectMessage, HomeStyledErrorMessage } from "./styles";
+import Button from "../../components/Button/Button";
+
 function Home() {
   const { isConnected, error } = useSocketContext();
   const { gameState, setGameOnCourse, newGame, joinGame } = useGameContext();
@@ -30,18 +33,25 @@ function Home() {
   };
 
   return (
-    <div>
-      <h1>The Side Stacker Game</h1>
-      {!isConnected && <label>Cannot connect to the server</label>}
-      {isConnected && (
-        <>
-          {!gameState && <button onClick={handleNewGame}>New Game</button>}
-          {canJoinGame() && <button onClick={handleJoinGame}>Join Game</button>}
-          {gameState && gameIsOnCourse() && <></>}
-        </>
-      )}
-      {error && <label>An error occurred: {error}</label>}
-    </div>
+    <HomeStyledWrapper className="home">
+      <div className="home-content-wrapper">
+        <div className="home-title">Side-Stacker Game</div>
+
+        {!gameState && (
+          <Button disabled={!isConnected} onClick={handleNewGame}>
+            New Game
+          </Button>
+        )}
+        {canJoinGame() && (
+          <Button disabled={!isConnected} onClick={handleJoinGame}>
+            Join Game
+          </Button>
+        )}
+        {gameState && gameIsOnCourse() && <></>}
+        {!isConnected && <HomeStyledConnectMessage>Error: Cannot connect to the server</HomeStyledConnectMessage>}
+        {error && <HomeStyledErrorMessage>An error occurred: {error}</HomeStyledErrorMessage>}
+      </div>
+    </HomeStyledWrapper>
   );
 }
 
