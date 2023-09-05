@@ -16,8 +16,13 @@ export const GameBoardStyledWrapper = styled.div`
   }
 
   .game-board-waiting-message {
-    align-self: start;
     color: ${config.STYLING.TITLE_FONT_COLOR};
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: bold;
   }
 
   .game-board-no-game-oncourse {
