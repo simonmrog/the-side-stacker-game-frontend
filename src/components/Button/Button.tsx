@@ -3,6 +3,7 @@ import { CSSProperties } from "react";
 import { ButtonStyledDiv } from "./styles";
 
 interface IButtonProps {
+  testId?: string;
   className?: string;
   style?: CSSProperties | undefined;
   disabled?: boolean;
@@ -10,9 +11,15 @@ interface IButtonProps {
   children: React.ReactNode;
 }
 
-function Button({ className, style, disabled, onClick, children }: IButtonProps) {
+function Button({ testId, className, style, disabled, onClick, children }: IButtonProps) {
   return (
-    <ButtonStyledDiv className={className} style={style} disabled={disabled ?? false} onClick={onClick}>
+    <ButtonStyledDiv
+      data-testid={testId}
+      className={className}
+      style={style}
+      disabled={disabled ?? false}
+      onClick={onClick}
+    >
       {children}
     </ButtonStyledDiv>
   );

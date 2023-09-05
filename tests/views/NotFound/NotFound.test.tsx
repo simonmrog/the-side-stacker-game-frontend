@@ -22,8 +22,8 @@ describe("NotFound View tests", () => {
   });
 
   test("should show the correct error message", () => {
-    const codeElement = screen.getByTestId("NotFound.Code");
-    const messageElement = screen.getByTestId("NotFound.Message");
+    const codeElement = screen.getByTestId("not-found.code");
+    const messageElement = screen.getByTestId("not-found.message");
     expect(codeElement).toBeInTheDocument();
     expect(codeElement.innerHTML).toBe("404");
     expect(messageElement).toBeInTheDocument();
@@ -31,14 +31,14 @@ describe("NotFound View tests", () => {
   });
 
   test("should render the back button", () => {
-    const backButton = screen.getByTestId("NotFound.Button");
+    const backButton = screen.getByTestId("not-found.button");
     const backButtonText = backButton.innerHTML;
     expect(backButton).toBeInTheDocument();
     expect(backButtonText).toContain("Go Back");
   });
 
   test("back button should navigate on click", () => {
-    const backButton = screen.getByTestId("NotFound.Button");
+    const backButton = screen.getByTestId("not-found.button");
     fireEvent.click(backButton);
     expect(mockedNavigate).toBeCalled();
   });
