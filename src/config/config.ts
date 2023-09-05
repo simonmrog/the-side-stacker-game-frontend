@@ -14,7 +14,11 @@ function configFactory(): IConfig {
       BUTTON_HOVER_SHADOW_COLOR: "#ac9f64",
       BUTTON_DISABLED_BACKGROUND_COLOR: "#696969",
       BUTTON_DISABLED_SHADOW_COLOR: "#a9a9a9",
+      MOVES_BOARD_BACKGROUND_COLOR: "#f5c736",
+      BOARD_BACKGROUND_COLOR: "#c6c6c6",
+      PLAYER_SIZE: "25px",
     },
+    MOVES_TO_SHOW: 5,
   };
 }
 

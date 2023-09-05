@@ -2,6 +2,7 @@ export interface IConfig {
   ENV: string;
   BACKEND_URL: string;
   STYLING: IStylingConfig;
+  MOVES_TO_SHOW: number;
 }
 
 export interface IStylingConfig {
@@ -14,4 +15,7 @@ export interface IStylingConfig {
   BUTTON_HOVER_SHADOW_COLOR: string;
   BUTTON_DISABLED_BACKGROUND_COLOR: string;
   BUTTON_DISABLED_SHADOW_COLOR: string;
+  MOVES_BOARD_BACKGROUND_COLOR: string;
+  BOARD_BACKGROUND_COLOR: string;
+  PLAYER_SIZE: string;
 }
