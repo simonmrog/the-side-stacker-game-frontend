@@ -30,6 +30,7 @@ export const GameBoardStyledWrapper = styled.div`
     transform: translate(-50%, -50%);
     text-align: center;
     font-weight: bold;
+    font-size: 2em;
   }
 
   .game-board-no-game-oncourse {

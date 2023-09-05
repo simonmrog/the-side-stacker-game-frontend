@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 
+import { errorCatalog } from "./config/errorCatalog";
 import { IPlayer } from "./interfaces/player.interface";
 import { IGameState, IGameStateEvent, IErrorMessageEvent } from "./interfaces/sideStacker.interface";
 import { ReducerActions } from "./contexts/gameContext.interface";
@@ -13,7 +14,7 @@ import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   const { setConnection, setError, setEventOnHold } = useSocketContext();
-  const { setGameOnCourse, dispatch } = useGameContext();
+  const { player, setGameOnCourse, dispatch } = useGameContext();
 
   // Disconnects the socket connection
   useEffect(() => {
@@ -31,10 +32,16 @@ function App() {
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState: game as IGameState } });
     };
 
+    const onGameBusy = (event: string) => {
+      console.log(`[Event]: ${event}`);
+      setGameOnCourse(true);
+    };
+
     const onPlayerJoined = (event: string, game: unknown) => {
       setEventOnHold(false);
       console.log(`[Event]: ${event}`, game);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState: game as IGameState } });
+      if ((game as IGameState).players.length === 2 && !player) setError(errorCatalog.GAME_BUSY);
     };
 
     const onPlayerGenerated = (event: string, player: unknown) => {
@@ -53,9 +60,11 @@ function App() {
     };
 
     const onGameDisconnected = (event: string, payload: unknown) => {
-      const { player, gameState } = payload as IGameStateEvent;
+      const { player: playerDisconnected, gameState } = payload as IGameStateEvent;
       console.log(`[Event]: ${event}`, gameState);
-      console.log(`${player.id} disconnected from the game`);
+      console.log(`${playerDisconnected} disconnected from the game`);
+      // if the player was in the game, we notify that the game was closed due to a lack of players
+      setError(null);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState } });
       setGameOnCourse(false);
     };
@@ -75,22 +84,22 @@ function App() {
 
     socketService.on("connecting", () => {
       console.log("[Event]: connecting");
-      document.write("Connecting...");
     });
 
     socketService.on("connect_failed", () => {
       console.log("[Event]: connect_failed");
       setConnection(false);
-      setError("Cannot connect to the server");
     });
 
     socketService.on("disconnect", reason => {
       console.log("Socket connection dismissed:", reason);
       setConnection(false);
+      setError(errorCatalog.SERVER_ERROR);
     });
 
     // game related events
     socketService.on("game-created", (game: unknown) => onGameStart("game-created", game));
+    socketService.on("game-busy", () => onGameBusy("game-busy"));
     socketService.on("game-restarted", (game: unknown) => onGameStart("game-restarted", game));
     socketService.on("player-joined", (game: unknown) => onPlayerJoined("player-joined", game));
     socketService.on("player-generated", (payload: unknown) => onPlayerGenerated("player-generated", payload));

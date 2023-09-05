@@ -5,6 +5,8 @@ import config from "../../config/config";
 export const HomeStyledErrorMessage = styled.div`
   color: ${config.STYLING.ERROR_FONT_COLOR};
   font-weight: 900;
+  font-size: 1.5em;
+  margin-top: 20px;
 `;
 
 export const HomeStyledWrapper = styled.div`
@@ -35,9 +37,4 @@ export const HomeStyledWrapper = styled.div`
       font-size: 80px;
     }
   }
-`;
-
-export const HomeStyledConnectMessage = styled.div`
-  margin-top: 20px;
-  color: ${config.STYLING.ERROR_FONT_COLOR};
 `;
