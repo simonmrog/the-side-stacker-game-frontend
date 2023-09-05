@@ -4,10 +4,10 @@ import config from "../../config/config";
 
 export const GameBoardStyledWrapper = styled.div`
   padding: 30px 18px;
-
-  .player-title {
-    margin-top: 40px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: start;
 
   .game-board-title {
     margin-top: 15px;
@@ -15,8 +15,21 @@ export const GameBoardStyledWrapper = styled.div`
     text-align: end;
   }
 
-  .board {
-    margin-bottom; 20px;
+  .game-board-waiting-message {
+    align-self: start;
+    color: ${config.STYLING.TITLE_FONT_COLOR};
+  }
+
+  .game-board-no-game-oncourse {
+    color: ${config.STYLING.TITLE_FONT_COLOR};
+  }
+`;
+
+export const GameBoardStyledContent = styled.div`
+  max-width: 100%;
+
+  .player-title {
+    margin-top: 40px;
   }
 `;
 

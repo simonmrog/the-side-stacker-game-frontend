@@ -7,7 +7,7 @@ import { GameStatus } from "../../interfaces/sideStacker.interface";
 import socketService from "../../services/socketService";
 import { useGameContext } from "../../hooks/useGameContext";
 
-import { GameBoardStyledWrapper } from "./styles";
+import { GameBoardStyledWrapper, GameBoardStyledContent } from "./styles";
 import Button from "../../components/Button/Button";
 import PlayerTitle from "../../components/PlayerTitle/PlayerTitle";
 import Board from "../../components/StackerBoard/Board";
@@ -35,10 +35,12 @@ function GameBoard() {
           <h2>Side-Stacker Game</h2>
         </div>
       }
-      {!gameOnCourse && <label>No game in course, redirecting...</label>}
-      {gameOnCourse && waitingForUser() && <div>Waiting for someone to join the game...</div>}
+      {!gameOnCourse && <div className="game-board-no-game-oncourse">No game in course, redirecting...</div>}
+      {gameOnCourse && waitingForUser() && (
+        <div className="game-board-waiting-message">Waiting for someone to join the game...</div>
+      )}
       {gameOnCourse && !waitingForUser() && (
-        <div>
+        <GameBoardStyledContent className="game-board-content">
           <PlayerTitle player={player} />
           <Board />
           <MovesBoard />
@@ -48,7 +50,7 @@ function GameBoard() {
             </Button>
           </div>
           <StyledResultMessage>{gameState?.winnerId && <label>{getResultMessage()}</label>}</StyledResultMessage>
-        </div>
+        </GameBoardStyledContent>
       )}
     </GameBoardStyledWrapper>
   );

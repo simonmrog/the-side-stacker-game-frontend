@@ -12,6 +12,7 @@ export const BoardStyledWrapper = styled.div`
   padding: 10px;
   background-color: ${config.STYLING.BOARD_BACKGROUND_COLOR};
   max-width: 500px;
+  max-width: 100%;
 `;
 
 export const StyledRow = styled.div`

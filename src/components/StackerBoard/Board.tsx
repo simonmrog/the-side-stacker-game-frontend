@@ -1,5 +1,3 @@
-import React from "react";
-
 import { BoardStyledWrapper } from "./styles";
 
 import { useGameContext } from "../../hooks/useGameContext";

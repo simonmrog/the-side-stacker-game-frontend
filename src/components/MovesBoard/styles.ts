@@ -4,7 +4,7 @@ import config from "../../config/config";
 
 export const MovesBoardStyledWrapper = styled.div`
   background-color: ${config.STYLING.MOVES_BOARD_BACKGROUND_COLOR};
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 10px 20px;
   text-align: center;
   margin: 30px 0 20px 0;
