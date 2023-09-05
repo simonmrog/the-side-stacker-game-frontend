@@ -27,13 +27,15 @@ function MovesBoard() {
         <div>
           {
             <ul>
-              {lastMoves() && lastMoves()!.length > 0
-                ? lastMoves()?.map((move, index) => (
-                    <li style={{ color: getPlayerColor(move) }} key={index}>
-                      {index + 1}. {move}
-                    </li>
-                  ))
-                : "No moves yet"}
+              {lastMoves() && lastMoves()!.length > 0 ? (
+                lastMoves()?.map((move, index) => (
+                  <li style={{ color: getPlayerColor(move) }} key={index}>
+                    {index + 1}. {move}
+                  </li>
+                ))
+              ) : (
+                <li>No moves yet</li>
+              )}
             </ul>
           }
         </div>

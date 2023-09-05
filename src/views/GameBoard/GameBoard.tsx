@@ -33,6 +33,9 @@ function GameBoard() {
       {
         <div className="game-board-title">
           <h2>Side-Stacker Game</h2>
+          {gameState?.winnerId && (
+            <StyledResultMessage>{gameState?.winnerId && <label>{getResultMessage()}</label>}</StyledResultMessage>
+          )}
         </div>
       }
       {!gameOnCourse && <div className="game-board-no-game-oncourse">No game in course, redirecting...</div>}
@@ -58,7 +61,6 @@ function GameBoard() {
               Restart
             </Button>
           </div>
-          <StyledResultMessage>{gameState?.winnerId && <label>{getResultMessage()}</label>}</StyledResultMessage>
         </GameBoardStyledContent>
       )}
     </GameBoardStyledWrapper>

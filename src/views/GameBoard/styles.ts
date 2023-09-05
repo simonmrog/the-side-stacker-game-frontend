@@ -74,17 +74,28 @@ export const GameBoardStyledContent = styled.div`
     }
 
     .moves-board-wrapper {
-      flex-basis: 30%;
+      flex-basis: 27%;
       margin-top: 0;
       margin-bottom: 0px;
+
+      li {
+        min-width: 230px;
+      }
     }
 
     .game-board-restart-button-wrapper {
-      display: block;
+      flex-basis: 100%;
     }
   }
 `;
 
 export const StyledResultMessage = styled.div`
-  background-color: grey;
+  background-color: #fff;
+  padding: 12px 10px;
+  width: 300px;
+  border-radius: 10px;
+  border: 2px solid #2f4f4f;
+  color: #3e3e3e;
+  font-weight: bold;
+  text-align: center;
 `;

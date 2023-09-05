@@ -28,6 +28,6 @@ export const MovesBoardStyledPanel = styled.div`
   li {
     text-align: left;
     font-weight: bold;
-    padding: 8px;
+    padding: 8px 0;
   }
 `;
