@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  sidestacker-frontend:
+    container_name: sidestacker-frontend
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - "../:/usr/src/app"
+      - "/usr/src/app/node_modules"
+    ports:
+      - 3000:3000
+    stdin_open: true
+    env_file: ../.env
+    environment:
+      - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
+      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+    command: npm start
+    networks:
+      - sidestacker-network
+
+networks:
+  sidestacker-network:
