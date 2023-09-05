@@ -12,8 +12,10 @@ import Button from "../../components/Button/Button";
 import PlayerTitle from "../../components/PlayerTitle/PlayerTitle";
 import Board from "../../components/StackerBoard/Board";
 import MovesBoard from "../../components/MovesBoard/MovesBoard";
+import { useSocketContext } from "../../hooks/useSocketContext";
 
 function GameBoard() {
+  const { eventOnHold, setEventOnHold } = useSocketContext();
   const { player, gameState, gameOnCourse, restartGame } = useGameContext();
   const navigate = useNavigate();
 
@@ -27,6 +29,11 @@ function GameBoard() {
 
   const waitingForUser = () =>
     gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && playerExists(socketService.getId());
+
+  const onRestart = () => {
+    setEventOnHold(true);
+    restartGame();
+  };
 
   return (
     <GameBoardStyledWrapper className="game-board">
@@ -58,7 +65,8 @@ function GameBoard() {
             <Button
               className="game-board-restart-button"
               style={{ fontSize: "1em", padding: "10px 20px" }}
-              onClick={restartGame}
+              disabled={eventOnHold}
+              onClick={onRestart}
             >
               Restart
             </Button>

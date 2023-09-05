@@ -6,6 +6,7 @@ import { useGameContext } from "../../hooks/useGameContext";
 
 import DirectionButton from "../DirectionButton/DirectionButton";
 import Cell from "./Cell";
+import { useSocketContext } from "../../hooks/useSocketContext";
 
 interface IRowProps {
   row: TRow;
@@ -13,17 +14,21 @@ interface IRowProps {
 }
 
 function Row({ row, rIndex }: IRowProps) {
+  const { eventOnHold, setEventOnHold } = useSocketContext();
   const { player, gameState } = useGameContext();
 
   const handleMove = (row: number, side: ISide) => {
     const move: IMove = { row, side };
     socketService.emit("move", move);
+    setEventOnHold(true);
   };
 
   const canMakeMove = () => {
     const fullRow = () => row.every((cell: TCell) => cell !== null);
     // The button should be disabled when the row is full, when the game is finished or when is not the user's move
-    return !fullRow() && gameState?.status === GameStatus.STARTED && gameState?.currentPlayer === player?.id;
+    return (
+      !eventOnHold && !fullRow() && gameState?.status === GameStatus.STARTED && gameState?.currentPlayer === player?.id
+    );
   };
 
   return (

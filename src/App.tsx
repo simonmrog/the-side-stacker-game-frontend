@@ -12,7 +12,7 @@ import { useGameContext } from "./hooks/useGameContext";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  const { setConnection, setError } = useSocketContext();
+  const { setConnection, setError, setEventOnHold } = useSocketContext();
   const { setGameOnCourse, dispatch } = useGameContext();
 
   // Disconnects the socket connection
@@ -32,6 +32,7 @@ function App() {
     };
 
     const onPlayerJoined = (event: string, game: unknown) => {
+      setEventOnHold(false);
       console.log(`[Event]: ${event}`, game);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState: game as IGameState } });
     };
@@ -42,6 +43,7 @@ function App() {
     };
 
     const onGameUpdate = (event: string, game: unknown) => {
+      if (event === "player-moved") setEventOnHold(false);
       console.log(`[Event]: ${event}`, game);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState: game as IGameState } });
     };
