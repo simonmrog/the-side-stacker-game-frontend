@@ -9,7 +9,7 @@ function MovesBoard() {
   const lastMoves = (): Array<string> | null | undefined => {
     if (!gameState) return null;
     const enoughMoves = gameState.moves.length <= config.MOVES_TO_SHOW;
-    const array = enoughMoves ? gameState.moves : gameState.moves.slice(config.MOVES_TO_SHOW);
+    const array = enoughMoves ? gameState.moves : gameState.moves.slice(-config.MOVES_TO_SHOW);
     console.log(array.length);
     return array;
   };
