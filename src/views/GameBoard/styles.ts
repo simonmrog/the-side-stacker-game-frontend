@@ -98,4 +98,8 @@ export const StyledResultMessage = styled.div`
   color: #3e3e3e;
   font-weight: bold;
   text-align: center;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 30px;
+  }
 `;
