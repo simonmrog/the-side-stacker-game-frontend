@@ -41,11 +41,20 @@ function GameBoard() {
       )}
       {gameOnCourse && !waitingForUser() && (
         <GameBoardStyledContent className="game-board-content">
-          <PlayerTitle player={player} />
-          <Board />
+          <div className="game-board-game-wrapper">
+            <PlayerTitle player={player} />
+            <Board />
+          </div>
           <MovesBoard />
-          <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
-            <Button style={{ fontSize: "1em", padding: "10px 20px" }} onClick={restartGame}>
+          <div
+            className="game-board-restart-button-wrapper"
+            style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}
+          >
+            <Button
+              className="game-board-restart-button"
+              style={{ fontSize: "1em", padding: "10px 20px" }}
+              onClick={restartGame}
+            >
               Restart
             </Button>
           </div>

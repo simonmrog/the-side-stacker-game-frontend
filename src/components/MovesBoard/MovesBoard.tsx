@@ -9,9 +9,7 @@ function MovesBoard() {
   const lastMoves = (): Array<string> | null | undefined => {
     if (!gameState) return null;
     const enoughMoves = gameState.moves.length <= config.MOVES_TO_SHOW;
-    const array = enoughMoves ? gameState.moves : gameState.moves.slice(-config.MOVES_TO_SHOW);
-    console.log(array.length);
-    return array;
+    return enoughMoves ? gameState.moves : gameState.moves.slice(-config.MOVES_TO_SHOW);
   };
 
   const getPlayerColor = (move: string) => {
@@ -23,7 +21,7 @@ function MovesBoard() {
   };
 
   return (
-    <MovesBoardStyledWrapper>
+    <MovesBoardStyledWrapper className="moves-board-wrapper">
       <p>Last Moves</p>
       <MovesBoardStyledPanel>
         <div>

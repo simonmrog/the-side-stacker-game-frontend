@@ -52,6 +52,37 @@ export const GameBoardStyledContent = styled.div`
   @media screen and (min-width: 768px) {
     max-width: 550px;
   }
+
+  @media screen and (min-width: 1200px) {
+    margin-top: 60px;
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .player-title {
+      max-width: 530px;
+      margin-top: 0;
+    }
+
+    .game-board-game-wrapper {
+      flex-basis: 60%;
+      margin-right: 20px;
+    }
+
+    .board {
+      margin-right: 0;
+    }
+
+    .moves-board-wrapper {
+      flex-basis: 30%;
+      margin-top: 0;
+      margin-bottom: 0px;
+    }
+
+    .game-board-restart-button-wrapper {
+      display: block;
+    }
+  }
 `;
 
 export const StyledResultMessage = styled.div`
