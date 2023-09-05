@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyledCell } from "./styles";
+import { CellStyled } from "./styles";
 
 import { IPlayer } from "../../interfaces/player.interface";
 
@@ -11,7 +11,7 @@ interface ICellProps {
 }
 
 function Cell({ player }: ICellProps) {
-  return <StyledCell className="Cell">{player && <Player color={player.color} />}</StyledCell>;
+  return <CellStyled className="cell">{player && <Player color={player.color} />}</CellStyled>;
 }
 
 export default Cell;

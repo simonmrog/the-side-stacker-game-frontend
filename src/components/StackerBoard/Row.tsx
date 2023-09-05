@@ -1,11 +1,10 @@
-import React from "react";
-
 import { StyledRow } from "./styles";
 
 import socketService from "../../services/socketService";
 import { GameStatus, TRow, TCell, IMove, ISide } from "../../interfaces/sideStacker.interface";
 import { useGameContext } from "../../hooks/useGameContext";
 
+import DirectionButton from "../DirectionButton/DirectionButton";
 import Cell from "./Cell";
 
 interface IRowProps {
@@ -28,16 +27,22 @@ function Row({ row, rIndex }: IRowProps) {
   };
 
   return (
-    <StyledRow className="Row">
-      <button className="row-left-button" onClick={() => handleMove(rIndex, "left")} disabled={!canMakeMove()}>
-        Left
-      </button>
+    <StyledRow className="row">
+      <DirectionButton
+        className="row-left-button"
+        direction="right"
+        onClick={() => handleMove(rIndex, "left")}
+        disabled={!canMakeMove()}
+      />
       {row.map((player, cIndex) => (
         <Cell key={`${rIndex}-${cIndex}`} player={player} />
       ))}
-      <button className="row-right-button" onClick={() => handleMove(rIndex, "right")} disabled={!canMakeMove()}>
-        Right
-      </button>
+      <DirectionButton
+        className="row-right-button"
+        direction="left"
+        onClick={() => handleMove(rIndex, "right")}
+        disabled={!canMakeMove()}
+      />
     </StyledRow>
   );
 }

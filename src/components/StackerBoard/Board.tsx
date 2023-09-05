@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyledBoard } from "./styles";
+import { BoardStyledWrapper } from "./styles";
 
 import { useGameContext } from "../../hooks/useGameContext";
 
@@ -11,11 +11,11 @@ function Board() {
 
   return (
     <>
-      <StyledBoard className="Board">
+      <BoardStyledWrapper className="board">
         {gameState?.board.map((row, rIndex) => (
           <Row key={rIndex} row={row} rIndex={rIndex} />
         ))}
-      </StyledBoard>
+      </BoardStyledWrapper>
     </>
   );
 }

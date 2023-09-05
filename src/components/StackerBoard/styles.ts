@@ -1,17 +1,21 @@
 import styled from "styled-components";
 
-export const StyledBoard = styled.div`
+import config from "../../config/config";
+
+export const BoardStyledWrapper = styled.div`
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid yellow;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: ${config.STYLING.BOARD_BACKGROUND_COLOR};
 `;
 
 export const StyledRow = styled.div`
   display: flex;
-  padding: 20px;
-  border: 1px solid yellow;
+  padding: 0 20px;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -25,10 +29,13 @@ export const StyledRow = styled.div`
   }
 `;
 
-export const StyledCell = styled.div`
+export const CellStyled = styled.div`
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  width: 150px;
+  min-height: calc(${config.STYLING.PLAYER_SIZE} + 5px);
+  min-width: calc(${config.STYLING.PLAYER_SIZE} + 5px);
+  border: 0.5px solid grey;
+  padding: 1px;
 `;
