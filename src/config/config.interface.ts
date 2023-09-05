@@ -17,5 +17,7 @@ export interface IStylingConfig {
   BUTTON_DISABLED_SHADOW_COLOR: string;
   MOVES_BOARD_BACKGROUND_COLOR: string;
   BOARD_BACKGROUND_COLOR: string;
-  PLAYER_SIZE: string;
+  PLAYER_SIZE_SM: string;
+  PLAYER_SIZE_MD: string;
+  PLAYER_SIZE_LG: string;
 }

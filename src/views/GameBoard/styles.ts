@@ -7,12 +7,19 @@ export const GameBoardStyledWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
+  align-items: center;
 
   .game-board-title {
+    width: 100%;
     margin-top: 15px;
     color: ${config.STYLING.TITLE_FONT_COLOR};
-    text-align: end;
+    text-align: right;
+
+    @media screen and (min-width: 768px) {
+      font-size: 1.5rem;
+      text-align: center;
+    }
   }
 
   .game-board-waiting-message {
@@ -34,7 +41,16 @@ export const GameBoardStyledContent = styled.div`
   max-width: 100%;
 
   .player-title {
-    margin-top: 40px;
+    margin-top: 20px;
+    text-align: right;
+
+    @media screen and (min-width: 768px) {
+      margin-top: 50px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    max-width: 550px;
   }
 `;
 
