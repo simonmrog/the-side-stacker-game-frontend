@@ -1,4 +1,3 @@
-// react state interface
 import { IPlayer } from "./player.interface";
 
 export interface IGameState {
@@ -10,7 +9,7 @@ export interface IGameState {
   winnerId: string | null;
 }
 
-// possible states of the game flow
+// Possible states of the game flow
 export enum GameStatus {
   NOT_STARTED = "not-started",
   WAITING_FOR_SECOND_USER = "waiting-for-second-user",
@@ -31,7 +30,7 @@ export interface IMove {
 
 export type ISide = "left" | "right";
 
-// event interfaces
+// Event interfaces
 export interface IGameStateEvent {
   player: IPlayer;
   gameState: IGameState;

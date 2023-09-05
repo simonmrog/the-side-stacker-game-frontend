@@ -1,5 +1,5 @@
 import { IPlayer } from "../interfaces/player.interface";
-import { IGameState } from "../interfaces/sideStacker.interface";
+import { IGameState } from "../interfaces/game.interface";
 
 export enum ReducerActions {
   UPDATE_PLAYER_ID = "update-player-id",

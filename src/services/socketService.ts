@@ -2,6 +2,9 @@ import { io } from "socket.io-client";
 
 import config from "../config/config";
 
+/*
+ class to hide the socket implementation as a service
+*/
 class SocketService {
   private socket;
 

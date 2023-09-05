@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { errorCatalog } from "../../config/errorCatalog";
-import { GameStatus } from "../../interfaces/sideStacker.interface";
+import { GameStatus } from "../../interfaces/game.interface";
 import socketService from "../../services/socketService";
 import { useSocketContext } from "../../hooks/useSocketContext";
 import { useGameContext } from "../../hooks/useGameContext";
@@ -17,6 +17,7 @@ function Home() {
 
   const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
 
+  // This happens when the game started but lacks of one player
   const canJoinGame = () =>
     gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && !playerExists(socketService.getId());
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { StyledResultMessage } from "./styles";
 
-import { GameStatus } from "../../interfaces/sideStacker.interface";
+import { GameStatus } from "../../interfaces/game.interface";
 import socketService from "../../services/socketService";
 import { useGameContext } from "../../hooks/useGameContext";
 
@@ -19,12 +19,14 @@ function GameBoard() {
   const { player, gameState, gameOnCourse, restartGame } = useGameContext();
   const navigate = useNavigate();
 
+  // If the game is not active, redirects to home page
   useEffect(() => {
     if (!gameOnCourse) navigate("/");
   }, [gameState]);
 
   const getResultMessage = () => (player?.id === gameState?.winnerId ? `${player?.name} won` : `${player?.name} lost`);
 
+  // Check whether the player exists in the game or not
   const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
 
   const waitingForUser = () =>

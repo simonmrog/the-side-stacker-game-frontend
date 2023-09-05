@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { errorCatalog } from "./config/errorCatalog";
 import { IPlayer } from "./interfaces/player.interface";
-import { IGameState, IGameStateEvent, IErrorMessageEvent } from "./interfaces/sideStacker.interface";
+import { IGameState, IGameStateEvent, IErrorMessageEvent } from "./interfaces/game.interface";
 import { ReducerActions } from "./contexts/gameContext.interface";
 
 import socketService from "./services/socketService";

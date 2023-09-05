@@ -9,6 +9,10 @@ import {
 } from "./gameContext.interface";
 import socketService from "../services/socketService";
 
+/*
+  This context will handle the basic game state
+  the actual player, the gameOnCourse flag and the game variables
+*/
 export const GameContext = createContext<IGameContext>({
   player: null,
   gameState: null,

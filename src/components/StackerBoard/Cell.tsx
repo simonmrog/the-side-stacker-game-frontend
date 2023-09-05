@@ -1,5 +1,3 @@
-import React from "react";
-
 import { CellStyled } from "./styles";
 
 import { IPlayer } from "../../interfaces/player.interface";

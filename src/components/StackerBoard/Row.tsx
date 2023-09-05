@@ -1,7 +1,7 @@
 import { StyledRow } from "./styles";
 
 import socketService from "../../services/socketService";
-import { GameStatus, TRow, TCell, IMove, ISide } from "../../interfaces/sideStacker.interface";
+import { GameStatus, TRow, TCell, IMove, ISide } from "../../interfaces/game.interface";
 import { useGameContext } from "../../hooks/useGameContext";
 
 import DirectionButton from "../DirectionButton/DirectionButton";
@@ -17,12 +17,14 @@ function Row({ row, rIndex }: IRowProps) {
   const { eventOnHold, setEventOnHold } = useSocketContext();
   const { player, gameState } = useGameContext();
 
+  // Emits the move event and sets the on hold flag to handle dead-times between events
   const handleMove = (row: number, side: ISide) => {
     const move: IMove = { row, side };
     socketService.emit("move", move);
     setEventOnHold(true);
   };
 
+  // this disables the button between turns or if the row is full
   const canMakeMove = () => {
     const fullRow = () => row.every((cell: TCell) => cell !== null);
     // The button should be disabled when the row is full, when the game is finished or when is not the user's move

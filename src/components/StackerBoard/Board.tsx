@@ -8,13 +8,11 @@ function Board() {
   const { gameState } = useGameContext();
 
   return (
-    <>
-      <BoardStyledWrapper className="board">
-        {gameState?.board.map((row, rIndex) => (
-          <Row key={rIndex} row={row} rIndex={rIndex} />
-        ))}
-      </BoardStyledWrapper>
-    </>
+    <BoardStyledWrapper className="board">
+      {gameState?.board.map((row, rIndex) => (
+        <Row key={rIndex} row={row} rIndex={rIndex} />
+      ))}
+    </BoardStyledWrapper>
   );
 }
 
