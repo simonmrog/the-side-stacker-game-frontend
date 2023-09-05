@@ -34,7 +34,9 @@ function GameBoard() {
         <div className="game-board-title">
           <h2>Side-Stacker Game</h2>
           {gameState?.winnerId && (
-            <StyledResultMessage>{gameState?.winnerId && <label>{getResultMessage()}</label>}</StyledResultMessage>
+            <StyledResultMessage className="game-board-styled-result-message">
+              {gameState?.winnerId && <label>{getResultMessage()}</label>}
+            </StyledResultMessage>
           )}
         </div>
       }

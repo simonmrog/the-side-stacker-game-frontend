@@ -92,14 +92,17 @@ export const GameBoardStyledContent = styled.div`
 export const StyledResultMessage = styled.div`
   background-color: #fff;
   padding: 12px 10px;
-  width: 300px;
   border-radius: 10px;
   border: 2px solid #2f4f4f;
   color: #3e3e3e;
   font-weight: bold;
   text-align: center;
 
-  @media screen and (max-width: 768px) {
-    margin-top: 30px;
+  @media screen and (min-width: 768px) {
+    width: 300px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    margin-top: 35px;
   }
 `;
