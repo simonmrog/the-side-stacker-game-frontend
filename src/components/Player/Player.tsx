@@ -5,7 +5,7 @@ interface IPlayerProps {
 }
 
 function Player({ color }: IPlayerProps) {
-  return <StyledDiv color={color}></StyledDiv>;
+  return <StyledDiv data-testid="player" color={color}></StyledDiv>;
 }
 
 export default Player;

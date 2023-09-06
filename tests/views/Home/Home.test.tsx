@@ -22,7 +22,6 @@ describe("Home View tests", () => {
   });
 
   function renderHome(socketContext: ISocketContext, gameContext: IGameContext) {
-    console.log("rendering...");
     return render(
       <SocketContext.Provider value={socketContext}>
         <GameContext.Provider value={gameContext}>
