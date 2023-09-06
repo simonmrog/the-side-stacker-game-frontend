@@ -16,7 +16,6 @@ function Home() {
   const navigate = useNavigate();
 
   const playerExists = (playerId: string) => gameState?.players.find(player => player.id === playerId);
-
   // This happens when the game started but lacks of one player
   const canJoinGame = () =>
     gameState?.status === GameStatus.WAITING_FOR_SECOND_USER && !playerExists(socketService.getId());
@@ -43,17 +42,21 @@ function Home() {
         <div className="home-title">Side-Stacker Game</div>
 
         {!gameState && !gameOnCourse && (
-          <Button disabled={!isConnected} onClick={handleNewGame}>
+          <Button testId="home.new-game-button" disabled={!isConnected} onClick={handleNewGame}>
             New Game
           </Button>
         )}
         {canJoinGame() && (
-          <Button disabled={!isConnected} onClick={handleJoinGame}>
+          <Button testId="home.join-game-button" disabled={!isConnected} onClick={handleJoinGame}>
             Join Game
           </Button>
         )}
-        {!isConnected && <HomeStyledErrorMessage>Cannot connect to the server</HomeStyledErrorMessage>}
-        {error && <HomeStyledErrorMessage>{error}</HomeStyledErrorMessage>}
+        {!isConnected && !error && (
+          <HomeStyledErrorMessage data-testid="home.not-connected-message">
+            Cannot connect to the server
+          </HomeStyledErrorMessage>
+        )}
+        {error && <HomeStyledErrorMessage data-testid="home.error-message">{error}</HomeStyledErrorMessage>}
       </div>
     </HomeStyledWrapper>
   );
