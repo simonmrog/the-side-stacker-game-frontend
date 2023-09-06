@@ -51,8 +51,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 You can also run this project using Docker and Docker Compose.
 In the root directory of the project, you first need to set the environment variables in a .env file (as shown in the .env.example file):
 
-CHOKIDAR_USEPOLLING=
-REACT_APP_BACKEND_URL=
+- CHOKIDAR_USEPOLLING=true
+- REACT_APP_BACKEND_URL=http://localhost:4200
 
 Once the environment variables are set, you can run:
 
@@ -64,7 +64,7 @@ This will bootstrap and expose the container to http://localhost:3000
 
 The game has three main views:
 
-The Home View from which you can start the game (remember you need to players i.e. two tabs of the application open)
+The Home View from which you can start the game (remember you need two players i.e. two tabs of the application open)
 
 ![Home View](./docs/home.png)
 
