@@ -14,8 +14,13 @@ function DirectionButton({ className, direction, disabled, onClick }: IDirection
   const icon = direction === "left" ? faCaretLeft : faCaretRight;
 
   return (
-    <DirectionButtonStyledWrapper className={className} disabled={disabled} onClick={onClick}>
-      <FontAwesomeIcon icon={icon} />
+    <DirectionButtonStyledWrapper
+      data-testid="direction-button"
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+    >
+      <FontAwesomeIcon data-testid="direction-button.icon" icon={icon} />
     </DirectionButtonStyledWrapper>
   );
 }
