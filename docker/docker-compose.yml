@@ -12,7 +12,6 @@ services:
     ports:
       - 3000:3000
     stdin_open: true
-    env_file: ../.env
     environment:
       - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
       - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
