@@ -9,7 +9,11 @@ interface ICellProps {
 }
 
 function Cell({ player }: ICellProps) {
-  return <CellStyled className="cell">{player && <Player color={player.color} />}</CellStyled>;
+  return (
+    <CellStyled data-testid="cell" className="cell">
+      {player && <Player color={player.color} />}
+    </CellStyled>
+  );
 }
 
 export default Cell;
