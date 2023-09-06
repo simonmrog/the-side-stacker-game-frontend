@@ -5,7 +5,7 @@ import { IPlayer } from "../../interfaces/player.interface";
 import Player from "../Player/Player";
 
 interface ICellProps {
-  player: IPlayer;
+  player: IPlayer | null;
 }
 
 function Cell({ player }: ICellProps) {
