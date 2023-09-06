@@ -28,7 +28,7 @@
     "test": "jest --verbose --coverage --passWithNoTests",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "lint:fix": "eslint --fix . --ext .js,.ts,.ts",
-    "prepare": "husky install"
+    "prepare:husky": "husky install"
   },
   "eslintConfig": {
     "extends": [
