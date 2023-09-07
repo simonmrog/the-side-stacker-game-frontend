@@ -62,7 +62,7 @@ function App() {
     const onGameDisconnected = (event: string, payload: unknown) => {
       const { player: playerDisconnected, gameState } = payload as IGameStateEvent;
       console.log(`[Event]: ${event}`, gameState);
-      console.log(`${playerDisconnected} disconnected from the game`);
+      console.log(`[Event]: ${playerDisconnected} disconnected from the game`);
       // if the player was in the game, we notify that the game was closed due to a lack of players
       setError(null);
       dispatch({ type: ReducerActions.UPDATE_GAME, payload: { gameState } });
@@ -76,7 +76,7 @@ function App() {
 
     // connection related events
     socketService.on("connect", () => {
-      console.log("[Event] socket connection established");
+      console.log("[Event]: socket connection established");
       setConnection(true);
     });
 
@@ -90,7 +90,7 @@ function App() {
     });
 
     socketService.on("disconnect", reason => {
-      console.log("Socket connection dismissed:", reason);
+      console.log("[Event] Socket connection dismissed:", reason);
       setConnection(false);
       setError(errorCatalog.SERVER_ERROR);
     });
