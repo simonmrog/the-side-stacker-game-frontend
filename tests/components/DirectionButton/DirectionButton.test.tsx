@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 
-import DirectionButton from "../../src/components/DirectionButton/DirectionButton";
+import DirectionButton from "../../../src/components/DirectionButton/DirectionButton";
 
 describe("DirectionButton component tests", () => {
   test("should render a div with a font-awesome component", () => {
