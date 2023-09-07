@@ -74,8 +74,6 @@ function App() {
       setError((error as IErrorMessageEvent).errorMessage);
     };
 
-    socketService.connect();
-
     // connection related events
     socketService.on("connect", () => {
       console.log("[Event] socket connection established");
@@ -116,7 +114,6 @@ function App() {
       socketService.off("connecting");
       socketService.off("connect_failed");
       socketService.off("disconnect");
-      socketService.off("exception");
       socketService.off("game-created");
       socketService.off("game-restarted");
       socketService.off("player-joined");
@@ -125,6 +122,7 @@ function App() {
       socketService.off("player-moved");
       socketService.off("game-finished");
       socketService.off("game-disconnected");
+      socketService.off("exception");
     };
   }, []);
 
