@@ -1,10 +1,8 @@
-import { BrowserRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 jest.mock("../src/services/socketService");
 
-import { GameStatus } from "../src/interfaces/game.interface";
 import { ISocketContext } from "../src/contexts/socketContext.interface";
 import { IGameContext } from "../src/contexts/gameContext.interface";
 import { SocketContext } from "../src/contexts/socketContext";
@@ -14,30 +12,30 @@ import socketService from "../src/services/socketService";
 
 import App from "../src/App";
 
-const fakeStateFunction = () => undefined;
-
-const defaultContext = {
-  socketContext: {
-    isConnected: false,
-    eventOnHold: false,
-    error: null,
-    setConnection: fakeStateFunction,
-    setEventOnHold: fakeStateFunction,
-    setError: fakeStateFunction,
-  },
-  gameContext: {
-    player: { id: "some-id", name: "some-name", color: "some-color" },
-    gameOnCourse: false,
-    gameState: null,
-    newGame: fakeStateFunction,
-    setGameOnCourse: fakeStateFunction,
-    restartGame: fakeStateFunction,
-    joinGame: fakeStateFunction,
-    dispatch: fakeStateFunction,
-  },
-};
-
 describe("App component tests", () => {
+  const fakeStateFunction = () => undefined;
+
+  const defaultContext = {
+    socketContext: {
+      isConnected: false,
+      eventOnHold: false,
+      error: null,
+      setConnection: fakeStateFunction,
+      setEventOnHold: fakeStateFunction,
+      setError: fakeStateFunction,
+    },
+    gameContext: {
+      player: { id: "some-id", name: "some-name", color: "some-color" },
+      gameOnCourse: false,
+      gameState: null,
+      newGame: fakeStateFunction,
+      setGameOnCourse: fakeStateFunction,
+      restartGame: fakeStateFunction,
+      joinGame: fakeStateFunction,
+      dispatch: fakeStateFunction,
+    },
+  };
+
   function renderApp(socketContext: ISocketContext, gameContext: IGameContext) {
     return render(
       <SocketContext.Provider value={socketContext}>
