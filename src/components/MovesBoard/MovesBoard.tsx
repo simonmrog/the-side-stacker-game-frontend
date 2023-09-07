@@ -31,12 +31,12 @@ function MovesBoard() {
             <ul>
               {lastMoves() && lastMoves()!.length > 0 ? (
                 lastMoves()?.map((move, index) => (
-                  <li style={{ color: getPlayerColor(move) }} key={index}>
+                  <li data-testid="moves-board.move" style={{ color: getPlayerColor(move) }} key={index}>
                     {index + 1}. {move}
                   </li>
                 ))
               ) : (
-                <li>No moves yet</li>
+                <li data-testid="moves-board.no-moves">No moves yet</li>
               )}
             </ul>
           }
