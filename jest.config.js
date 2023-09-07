@@ -22,8 +22,8 @@ export default {
   collectCoverageFrom: ["<rootDir>/src/**"],
   coverageThreshold: {
     global: {
-      statements: 60,
-      branches: 50,
+      statements: 70,
+      branches: 60,
       functions: 40,
       lines: 70,
     },

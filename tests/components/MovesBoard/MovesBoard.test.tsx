@@ -54,7 +54,7 @@ describe("MovesBoard component tests", () => {
     }
   });
 
-  test("should render the same number of moves as the game state with the correct messages and not render the 'no moves' message", () => {
+  test("should color messages as moves there are in the game state and not render the 'no moves' message", () => {
     const moves = ["Player 1 played (0, left)", "Player 2 played (1, right)", "Player 1 played (2, left)"];
     const expectedMovesMessages = [
       "1. Player 1 played (0, left)",
@@ -70,13 +70,20 @@ describe("MovesBoard component tests", () => {
       setError: fakeStateFunction,
     };
     const gameContext: IGameContext = {
-      player: { id: "some-id", name: "some-name", color: "some-color" },
-      gameOnCourse: false,
+      player: { id: "some-id-2", name: "Player 2", color: "blue" },
+      gameOnCourse: true,
       gameState: {
         status: GameStatus.STARTED,
         board: Array.from({ length: 7 }, () => Array(7).fill(null)),
-        players: [],
-        currentPlayer: null,
+        players: [
+          { id: "some-id-1", name: "Player 1", color: "red" },
+          {
+            id: "some-id-2",
+            name: "Player 2",
+            color: "blue",
+          },
+        ],
+        currentPlayer: "some-id-2",
         moves,
         winnerId: null,
       },
@@ -90,9 +97,10 @@ describe("MovesBoard component tests", () => {
     renderMovesBoard(socketContext, gameContext);
     const moveMessagesComponents = screen.getAllByTestId("moves-board.move");
     const moveMessages = moveMessagesComponents.map(move => move.innerHTML);
-
     expect(moveMessagesComponents.length).toEqual(moves.length);
     expect(moveMessages).toEqual(expectedMovesMessages);
+
+    expect(moveMessagesComponents[0]).toHaveStyle("color: red");
 
     try {
       screen.getAllByTestId("moves-board.no-moves");
