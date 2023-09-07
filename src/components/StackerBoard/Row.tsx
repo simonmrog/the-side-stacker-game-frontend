@@ -34,7 +34,7 @@ function Row({ row, rIndex }: IRowProps) {
   };
 
   return (
-    <StyledRow className="row">
+    <StyledRow data-testid="row" className="row">
       <DirectionButton
         className="row-left-button"
         direction="right"
