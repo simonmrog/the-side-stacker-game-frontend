@@ -32,7 +32,8 @@ export function GameProvider({ children }: IGameProviderProps) {
       case ReducerActions.UPDATE_GAME:
         return { ...state, gameState: action.payload.gameState };
       default:
-        throw new Error("[Reducer Error] Invalid action");
+        console.error("[Reducer Error] Invalid action");
+        return { ...state };
     }
   };
 

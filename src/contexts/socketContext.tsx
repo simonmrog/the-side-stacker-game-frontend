@@ -19,7 +19,7 @@ export function SocketProvider({ children }: ISocketProviderProps) {
   // Connected or not to the server
   const [isConnected, setConnection] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  // Manages the dead times between events
+  // Manages dead times between events
   const [eventOnHold, setEventOnHold] = useState<boolean>(false);
 
   return (

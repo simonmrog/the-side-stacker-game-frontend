@@ -6,7 +6,7 @@ import config from "../config/config";
  class to hide the socket implementation as a service
 */
 class SocketService {
-  private socket;
+  public socket;
 
   constructor() {
     this.socket = io(config.BACKEND_URL, { autoConnect: false });

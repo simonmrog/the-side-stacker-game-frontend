@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --verbose --coverage --passWithNoTests --silent=false",
+    "test": "jest --verbose --coverage --passWithNoTests --silent=false --detectOpenHandles",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "lint:fix": "eslint --fix . --ext .js,.ts,.ts",
     "prepare:husky": "husky install"
