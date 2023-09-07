@@ -44,14 +44,16 @@ function GameBoard() {
           <h2>Side-Stacker Game</h2>
           {gameState?.winnerId && (
             <StyledResultMessage className="game-board-styled-result-message">
-              {gameState?.winnerId && <label>{getResultMessage()}</label>}
+              <label data-testid="game-board.result-message">{getResultMessage()}</label>
             </StyledResultMessage>
           )}
         </div>
       }
       {!gameOnCourse && <div className="game-board-no-game-oncourse">No game in course, redirecting...</div>}
       {gameOnCourse && waitingForUser() && (
-        <div className="game-board-waiting-message">Waiting for someone to join the game...</div>
+        <div data-testid="game-board.waiting-message" className="game-board-waiting-message">
+          Waiting for someone to join the game...
+        </div>
       )}
       {gameOnCourse && !waitingForUser() && (
         <GameBoardStyledContent className="game-board-content">
@@ -65,6 +67,7 @@ function GameBoard() {
             style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}
           >
             <Button
+              testId="game-board.restart-button"
               className="game-board-restart-button"
               style={{ fontSize: "1em", padding: "10px 20px" }}
               disabled={eventOnHold}
