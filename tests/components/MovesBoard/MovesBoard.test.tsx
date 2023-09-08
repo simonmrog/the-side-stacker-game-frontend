@@ -24,9 +24,11 @@ describe("MovesBoard component tests", () => {
 
   test("should not render any move but the 'no moves' message when there are no moves", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: false,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -62,9 +64,11 @@ describe("MovesBoard component tests", () => {
       "3. Player 1 played (2, left)",
     ];
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: true,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,

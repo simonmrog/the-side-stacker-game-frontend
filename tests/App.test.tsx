@@ -17,9 +17,11 @@ describe("App component tests", () => {
 
   const defaultContext = {
     socketContext: {
+      isLoading: false,
       isConnected: false,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -60,6 +62,7 @@ describe("App component tests", () => {
       "connecting",
       "connect_failed",
       "disconnect",
+      "loading",
       "game-created",
       "game-busy",
       "game-restarted",

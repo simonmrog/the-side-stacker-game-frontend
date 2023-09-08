@@ -47,7 +47,7 @@ export function GameProvider({ children }: IGameProviderProps) {
   const newGame = () => {
     // SocketIO guarantees the same event order
     socketService.emit("new-game");
-    socketService.emit("join-game");
+    // socketService.emit("join-game");
   };
 
   const restartGame = () => {

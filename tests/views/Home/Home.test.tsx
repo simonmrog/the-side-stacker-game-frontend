@@ -37,9 +37,11 @@ describe("Home View tests", () => {
 
   test("new game should navigate on click", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: false,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -65,9 +67,11 @@ describe("Home View tests", () => {
 
   test("join game should navigate on click", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: true,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -100,9 +104,11 @@ describe("Home View tests", () => {
 
   test("should show an error when is not connnected", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: false,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -126,9 +132,11 @@ describe("Home View tests", () => {
 
   test("should show an error when is not connnected", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: false,
       eventOnHold: false,
       error: "some error",
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,

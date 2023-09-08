@@ -28,9 +28,11 @@ describe("Board component tests", () => {
   test("should not create any row when the game has not started", () => {
     try {
       const socketContext: ISocketContext = {
+        isLoading: false,
         isConnected: false,
         eventOnHold: false,
         error: null,
+        setLoading: fakeStateFunction,
         setConnection: fakeStateFunction,
         setEventOnHold: fakeStateFunction,
         setError: fakeStateFunction,
@@ -57,9 +59,11 @@ describe("Board component tests", () => {
   test("should create rows equal to the length of the board", () => {
     const boardRows = 7;
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: false,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,

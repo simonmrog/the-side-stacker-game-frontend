@@ -13,7 +13,7 @@ import { useGameContext } from "./hooks/useGameContext";
 import AppRoutes from "./routes/AppRoutes";
 
 function App() {
-  const { setConnection, setError, setEventOnHold } = useSocketContext();
+  const { setLoading, setConnection, setError, setEventOnHold } = useSocketContext();
   const { player, setGameOnCourse, dispatch } = useGameContext();
 
   // Disconnects the socket connection
@@ -95,6 +95,10 @@ function App() {
       setError(errorCatalog.SERVER_ERROR);
     });
 
+    socketService.on("loading", (loadingState: unknown) => {
+      setLoading(loadingState as boolean);
+    });
+
     // game related events
     socketService.on("game-created", (game: unknown) => onGameStart("game-created", game));
     socketService.on("game-busy", () => onGameBusy("game-busy"));
@@ -114,6 +118,7 @@ function App() {
       socketService.off("connecting");
       socketService.off("connect_failed");
       socketService.off("disconnect");
+      socketService.off("loading");
       socketService.off("game-created");
       socketService.off("game-restarted");
       socketService.off("player-joined");

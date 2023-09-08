@@ -40,9 +40,11 @@ describe("GameBoard view tests", () => {
 
   test("should redirect to home if there is no game on course", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: false,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -65,9 +67,11 @@ describe("GameBoard view tests", () => {
 
   test("should set event on hold and restart the game when the 'restart' button is pressed", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: true,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -108,9 +112,11 @@ describe("GameBoard view tests", () => {
 
   test("should show the waiting message when the state of the game is WAITING_FOR_SECOND_USER", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: true,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
@@ -142,9 +148,11 @@ describe("GameBoard view tests", () => {
 
   test("should show the result message when the winnerId is set", () => {
     const socketContext: ISocketContext = {
+      isLoading: false,
       isConnected: true,
       eventOnHold: false,
       error: null,
+      setLoading: fakeStateFunction,
       setConnection: fakeStateFunction,
       setEventOnHold: fakeStateFunction,
       setError: fakeStateFunction,
